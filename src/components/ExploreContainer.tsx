@@ -38,7 +38,6 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             data,
             path: 'doesThisWork.zip',
             directory: Directory.Documents,
-            encoding: Encoding.UTF8,
             recursive: true
           });
           console.log('Filesystem result', result);
