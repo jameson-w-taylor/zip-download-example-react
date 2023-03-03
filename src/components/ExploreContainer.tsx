@@ -5,7 +5,7 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { IonButton } from '@ionic/react';
 
 const zipFilename = 'doesThisWork.zip';
-const fileWithinZip = 'Test/MyFile.txt';
+const fileWithinZip = 'umler.csv';
 
 interface ContainerProps { }
 
