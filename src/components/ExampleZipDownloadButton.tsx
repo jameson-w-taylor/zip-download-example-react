@@ -36,7 +36,7 @@ const ExampleZipDownloadButton: React.FC<ZipDownloadProps> = ({ downloadUrl, zip
         // Log out result of unzipping
         console.debug('JSZip results:');
         zip.forEach((relativePath, zipEntry) => {
-          console.debug('entry detected in zip', zipEntry.name);
+          console.debug('entry detected in zip: ', zipEntry.name);
         });
 
         // Access a specific item in unzipped contents
@@ -46,7 +46,7 @@ const ExampleZipDownloadButton: React.FC<ZipDownloadProps> = ({ downloadUrl, zip
         });
         
         if (someZipContent) {
-          console.log('Unzip/Extracted Data', someZipContent);
+          console.log('Unzip/Extracted Data: ', someZipContent);
 
           // Save extracted file to device
           await measurePerformance({
@@ -60,7 +60,7 @@ const ExampleZipDownloadButton: React.FC<ZipDownloadProps> = ({ downloadUrl, zip
             action: () => read(savedFilename)
           });
 
-          console.log('Saved Filesystem Data', readResult.data);
+          console.log('Saved Filesystem Data: ', readResult.data);
         }
       } catch (e) {
         console.error('Function downloadAndExtractFile failed', e);

@@ -10,14 +10,8 @@ export const FilesystemContext = createContext<{
 });
 
 export const FilesystemProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const read = async (options: ReadFileOptions) => {
-    const readResult = await Filesystem.readFile(options);
-    return readResult;
-  }
-  const write = async (options: WriteFileOptions) => {
-    const writeResult = await Filesystem.writeFile(options);
-    return writeResult;
-  };
+  const read = async (options: ReadFileOptions) => Filesystem.readFile(options);
+  const write = async (options: WriteFileOptions) => Filesystem.writeFile(options);
 
   return (
     <FilesystemContext.Provider value={{ read, write }}>
