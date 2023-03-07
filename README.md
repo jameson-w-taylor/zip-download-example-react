@@ -30,4 +30,6 @@ ionic capacitor open android
 ### Notes
 Typically there would be a web server involved for downloading the file, but to make this example simpler it is bundled with the application code (`public/assets/Test.zip`). This is not suitable for production, but enables the ability to "download" the `.zip` file when running on devices through the local Capacitor web server.
 
+Because of the purposefully large file, Android emulators will crash without adding `android:largeHeap="true"` to the `android/app/src/main/AndroidManifest.xml` file.
+
 The `Home` page passes some configuration values to the `ExampleZipDownloadButton` which controls where the `.zip` file is located, what item _within_ the file to extract and the name of the file that's saved to the device.
