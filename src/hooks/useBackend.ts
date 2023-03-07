@@ -1,11 +1,16 @@
-import { useContext } from 'react';
-import { BackendContext } from '../components/BackendProvider';
+import axios from 'axios';
 
 export const useBackend = () => {
-  const { getSampleZipFile } = useContext(BackendContext);
-
-  if (getSampleZipFile === undefined) throw new Error('useBackend must be used within a BackendProvider');
-
+  const getSampleZipFile = async (url: string) => {
+    const response = await axios.get(url, {
+      headers: {
+        'Content-Type': 'application/zip'
+      },
+      responseType: 'arraybuffer'
+    });
+    return response.data as ArrayBuffer;
+  }
+  
   return {
     getSampleZipFile
   };
