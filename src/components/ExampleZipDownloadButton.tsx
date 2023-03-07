@@ -15,7 +15,7 @@ interface ZipDownloadProps {
 const ExampleZipDownloadButton: React.FC<ZipDownloadProps> = ({ downloadUrl, zipFileToExtract, savedFilename }) => {
   const { measurePerformance } = usePerformance();
   const { getSampleZipFile } = useBackend();
-  const { read, write } = useFilesystem({ directory: Directory.Data, encoding: Encoding.UTF8 });
+  const { readFile, writeFile } = useFilesystem({ path: savedFilename, directory: Directory.Data, encoding: Encoding.UTF8 });
   
   const downloadAndExtractFile = async () => {
     // Download file
@@ -36,12 +36,12 @@ const ExampleZipDownloadButton: React.FC<ZipDownloadProps> = ({ downloadUrl, zip
         // Log out result of unzipping
         console.debug('JSZip results:');
         zip.forEach((relativePath, zipEntry) => {
-          console.debug('entry detected in zip: ', zipEntry.name);
+          console.debug(`entry detected in zip: "${zipEntry.name}"`);
         });
 
         // Access a specific item in unzipped contents
         const someZipContent = await measurePerformance({
-          label: `Extract ${zipFileToExtract}`,
+          label: `Extract "${zipFileToExtract}"`,
           action: async () => zip.file(zipFileToExtract)?.async('text')
         });
         
@@ -50,14 +50,14 @@ const ExampleZipDownloadButton: React.FC<ZipDownloadProps> = ({ downloadUrl, zip
 
           // Save extracted file to device
           await measurePerformance({
-            label: 'Filesystem write',
-            action: () => write(savedFilename, someZipContent)
+            label: `Filesystem write "${savedFilename}"`,
+            action: () => writeFile(someZipContent)
           });
 
           // Read file to simulate loading it again at a later time
           const readResult = await measurePerformance({
-            label: 'Filesystem read',
-            action: () => read(savedFilename)
+            label: `Filesystem read "${savedFilename}"`,
+            action: () => readFile()
           });
 
           console.log('Saved Filesystem Data: ', readResult.data);
