@@ -2,7 +2,7 @@ import { ReadFileOptions } from '@capacitor/filesystem';
 import { useContext } from 'react';
 import { FilesystemContext } from '../components/FilesystemProvider';
 
-export const useFilesystem = (options: Omit<ReadFileOptions, 'path'>) => {
+export const useFilesystem = (options: Pick<ReadFileOptions, 'directory'|'encoding'>) => {
   const { read, write } = useContext(FilesystemContext);
   const { directory, encoding } = options;
 
