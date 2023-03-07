@@ -1,10 +1,10 @@
 import { Filesystem, ReadFileOptions } from '@capacitor/filesystem';
 
-export const useFilesystem = (options: Pick<ReadFileOptions, 'directory'|'encoding'>) => {
-  const { directory, encoding } = options;
+export const useFilesystem = (options: ReadFileOptions) => {
+  const { path, directory, encoding } = options;
 
   return {
-    read: (path: string) => Filesystem.readFile({ path, directory, encoding }),
-    write: (path: string, data: string) => Filesystem.writeFile({ path, data, directory, encoding })
+    readFile: () => Filesystem.readFile({ path, directory, encoding }),
+    writeFile: (data: string) => Filesystem.writeFile({ path, data, directory, encoding })
   };
 };
